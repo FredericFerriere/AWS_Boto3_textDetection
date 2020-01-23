@@ -1,0 +1,78 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Text Recognition in images using Boto3</title>
+	<style type="text/css">
+		body { font-family: Helvetica, sans-serif; }
+		h2, h3 { margin-top:0; }
+		form { margin-top: 10px; }
+		form > input { margin-right: 10px; }
+		#lab1 { float:left; margin:10px; padding:10px; }
+		#canvas { float:left; margin:10px; padding:10px; border:1px solid; }
+		#btn { float:left; margin:10px; padding:10px;   }
+		#textOutput { float:left; margin:10px; padding:10px; border:1px solid; }
+	</style>
+</head>
+
+<body>
+	<h1> Text Recognition in Image</h1>
+	
+	<form action="index.html" method="post" enctype="multipart/form-data">
+		<label id="lab1" for="file">Choose an image file:</label>
+		<input type="file" name="myfile" id="myfileid" onchange="showImage(event)" accept="image/*"/>
+	</form>
+
+	<canvas id="canvas"></canvas>
+
+	<button id="btn" onclick="sendToServer()">Analyze Image</button>
+
+	<textarea readonly id="textOutput" name="story" rows="30" cols="50">
+	output here
+	</textarea>
+	
+	<!--img id="myImage" width=400/-->
+
+	
+	
+	<script>
+		function showImage(event){
+		var img = new Image();
+		img.onload = draw;
+		img.src = URL.createObjectURL(event.target.files[0]);
+		};
+	</script>
+
+	<script>
+		function draw(){
+		var canvas = document.getElementById('canvas')
+		canvas.width = 500
+		canvas.height = canvas.width * this.height/this.width;
+		var ctx = canvas.getContext('2d');
+		ctx.drawImage(this,0,0,this.width,this.height,0,0,canvas.width,canvas.height);
+		};
+	</script>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+	<script type="text/javascript">
+		function sendToServer()
+		{
+		var canvasObj = document.getElementById("canvas");
+		var img = canvasObj.toDataURL();
+		$.ajax({
+    			type: "POST",
+    			url: "http://127.0.0.1:5000/predict/",
+    			data: img,
+    			success: function(data)
+				{
+    				txtAr = document.getElementById("textOutput");
+				console.log("result: " + data);
+				txtAr.innerHTML = data;
+  				}
+			});
+		};
+	</script>
+</body>
