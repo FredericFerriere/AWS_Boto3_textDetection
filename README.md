@@ -6,7 +6,7 @@ Using Rekognition from AWS boto3 to detect text in an image.
 
 From your web browser, you will be able to load an image and extract the text from a picture.
 
-![](./result.jpg)
+![](./screenshots/result.jpg)
 
 ## AWS Architecture
 
@@ -62,7 +62,7 @@ Configure its Security Group to accept inbound HTTP and HTTPS on top of SSH
 
 Copy index.html to this Instance. Make sure to change the default IP address in the html script to the public IP address of your web App instance.
 
-![](./htmlPage_IP_ToChange.png)
+![](./screenshots/htmlPage_IP_ToChange.png)
 
 1- copy index.html to this instance
 
@@ -79,8 +79,8 @@ $ sudo service httpd start
 
 From your web browser, navigate to the public IP address of your web server. The following page should appear.
 
-![](./webPage.png)
+![](./screenshots/webPage.png)
 
 Select a file from your hard drive. And click Analyze Image. The extracted text will be displayed in the textarea located on the right.
 
-![](./outputFinal.png)
+![](./screenshots/outputFinal.png)
