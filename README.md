@@ -36,7 +36,7 @@ Instance Type: Amazon Linux 2 AMI
 Subnet: Subnet 2  
 Configure its Security Group to accept inbound Custom TCP on port 5000.
 
-copy the file botoText.py to this instance.  
+copy the file main.py to this instance.  
 
 Run the following commands:  
 $ sudo yum update -y  
@@ -51,7 +51,7 @@ boto3 needs your aws credentials to run properly. Those may be hard coded in the
 For this project, I had to hard code the credentials in the Python script as boto3 wasn't able to locate the credentials file properly. This is far from ideal but good enough for a dev set up.  
 
 You can now run the App:  
-$ sudo python botoText.py  
+$ sudo python main.py  
 
 
 ## Creating the web server
